@@ -25,6 +25,7 @@ Controls
 
 import random
 import os
+from loguru import logger
 
 # import basic pygame modules
 import pygame as pg
@@ -39,8 +40,11 @@ MAX_SHOTS = 2  # most player bullets onscreen
 ALIEN_ODDS = 22  # chances a new alien appears
 BOMB_ODDS = 60  # chances a new bomb will drop
 ALIEN_RELOAD = 12  # frames between new aliens
-SCREENRECT = pg.Rect(0, 0, 640, 480)
+RESOLUTION_X = 640
+RESOLUTION_Y = 480
+SCREENRECT = pg.Rect(0, 0, RESOLUTION_X, RESOLUTION_Y)
 SCORE = 0
+
 
 main_dir = os.path.split(os.path.abspath(__file__))[0]
 
@@ -234,7 +238,7 @@ def main(winstyle=0):
         pg.mixer.pre_init(44100, 32, 2, 1024)
     pg.init()
     if pg.mixer and not pg.mixer.get_init():
-        print("Warning, no sound")
+        logger.warning("Warning, no sound")
         pg.mixer = None
 
     fullscreen = False
